@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the number</title>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script>
+        
+        let app = document.getElementById('app');
+        let randomNum = Math.floor(Math.random()*10);
+        let inputValue = 0;
+        let result = '';
+
+        updateView();
+
+        function updateView(){
+        app.innerHTML = /*html*/`
+        <input oninput="inputValue=this.value" class="input">
+        <button onclick="checkNum()" class="btn">Sjekk nummer</button>
+        <div id="resultBox">${result}</div>
+        `;
+        }
+
+        function checkNum(){
+            if(inputValue > randomNum){
+               result=`
+              Du gjettet for høyt!
+              <img src="loser.jpg">
+              `;
+            }
+            else if (inputValue < randomNum){
+              result=`
+                Du gjettet for lavt!
+                <img src="loser.jpg">
+              `;
+            }
+            else if (inputValue == randomNum){
+              result=`
+                Du gjettet riktig!
+                <img src="winner.jpg">
+              `;
+            } 
+            updateView();
+            }
+    </script>
+
+    <style>
+      #app{
+        display: grid;
+        justify-content: center;
+        margin: 50px;
+      }
+      #resultBox{
+        border: double 10px;
+        width: 440px;
+        height: 300px;
+        margin: 30px;
+        font-family: monospace;
+        font-weight: bolder;
+        font-style: italic;
+        font-size: 40px;
+        padding: 10px;
+      }
+      .btn{
+        margin-left: 235px;
+        width: fit-content;
+        gap: 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+      }
+      .input{
+        margin-left: 200px;
+        width: fit-content;
+        gap: 20px;
+      }
+      img{
+        width: 150px;
+        margin-left: 160px;
+        margin-top: 30px;
+      }
+    </style>
+</body>
+</html>
